@@ -87,19 +87,9 @@ def result(website):
             content_api_key = website_source[content_api_begin + 9:content_api_end - 2]
             # Set variables
             api_type = "content"
-            api_url = 'ghost/api/v2/content'
+            api_url = 'ghost/api/v3/content'
             api_key = '?key={}'.format(content_api_key)
-        # 2) Public API
-        elif client_secret_begin != -1:
-            client_secret_end = website_source.find('});', client_secret_begin)
-            # Get secret
-            client_secret = website_source[client_secret_begin + 15:client_secret_end - 2]
-            # Set variables
-            api_type = "public"
-            client_id = 'ghost-frontend' 
-            api_url = 'ghost/api/v0.1'
-            api_key = '?client_id={}&client_secret={}'.format(client_id, client_secret)
-        
+               
         # Exit with error
         else:
             alert = 'Website detected, but no API found. See the instructions section below.'
